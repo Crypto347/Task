@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 
+import {
+  connect
+} from 'react-redux';
+
+import {
+  bindActionCreators
+} from 'redux';
+
+import * as Actions from './actions/todo.actions';
+
 import Aux from './hoc/Aux';
 import Top from './Components/Top/Top';
-
 import Button from './Components/Button/Button';
 
 
@@ -26,4 +35,15 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  (state)=>{
+      return {
+          todos: state.todos
+      };
+  },
+  (dispatch)=>{
+      return {
+          actions: bindActionCreators(Actions, dispatch)
+      };
+  }
+)(App);
