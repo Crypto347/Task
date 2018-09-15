@@ -1,45 +1,57 @@
 import React,{Component} from 'react';
 
 import classes from './Top.css';
+import ItemList from '../ItemList/ItemList';
 
 class Top extends Component{
    
 state = {
-        input:[]
+        input: "",
+        inputNotes:[]
 }
     
 handleChange=(event)=>{
-    this.state.input.push(event.target.value);
-    
-}
+    const value = event.target.value;
+    this.setState({
+        input: value
+    });
+};
 
 handleClick=()=>{
+    const inputNote = this.state.inputNotes.map((name)=>name);
+    inputNote.push(this.state.input);
     this.setState({
-        input: this.state.input
+        inputNotes: inputNote
     })
 }
 
-renderList=()=>{
-    const list = this.state.input.map((n,i)=>{
-        return (
-            <li key ={n+i}>
-                {n}
-            </li>
-        );
-    })
-
-    return (
-        <ul>
-            {list}
-        </ul>
-    );
-}
+// renderList=()=>{
+//     const list = this.state.inputNotes.map((n,i)=>{
+//         return (
+//             <li key ={i}>
+//                 {n}
+//             </li>
+//         );
+//     })
+    
+//     return (
+//         <ul>
+//             {list}
+//         </ul>
+//     );
+// }
 
 render() {
     return (
-        <div className={classes.Top}>
-            {this.renderList()}
-            <input type="text" onBlur={this.handleChange}/>
+        <div className={classes.Top} 
+            style={{
+                transform: this.props.show ? 'translateY(0)': 'translateY(-100vh)',
+                opacity: this.props.show ? '1' : '0'
+            }}>
+            <div className={classes.ItemList}>
+                <ItemList inputNotes={this.state.inputNotes}/>
+             </div>
+            <input type="text" onChange={this.handleChange}/>
             <button onClick={this.handleClick}>Add</button>
         </div>
     );
