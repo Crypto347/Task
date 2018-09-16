@@ -1,7 +1,5 @@
-.App {
-  text-align: center;
-}
-
-.Button {
-  background-color: red;
+.App svg{
+  fill: white;
+    width: 20px;
+    margin-top: 5px;
 }

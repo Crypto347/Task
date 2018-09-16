@@ -1,20 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
+
+import classes from './ItemList.css';
 
 
-const itemList = (props) => {
-    const list = props.inputNotes.map((n,i)=>{
+class ItemList extends Component {
+    state = {
+        inputNotes: []
+    }
+
+
+    componentWillReceiveProps = (nextProps) => {
+      setTimeout(() => {
+            this.setState({inputNotes: nextProps.inputNotes});
+     },this.props.delay);
+ }
+
+    render(){
+        const list = this.state.inputNotes.map((n,i)=>{
+            return (
+                <li key = {n+i}>
+                    {n}
+                </li>
+            );
+        })
+    
         return (
-            <li key ={n+i}>
-                {n}
-            </li>
+            <div className={classes.ItemList}>
+                <h1>Notes:</h1>
+                <ul>
+                     {list}
+                </ul>
+            </div>
         );
-    })
-
-    return (
-            <ul>
-                 {list}
-            </ul>
-    );
+    }
 }
 
-export default itemList;
+export default ItemList;
