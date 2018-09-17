@@ -8,23 +8,22 @@ class ItemList extends Component {
         inputNotes: []
     }
 
-
     componentWillReceiveProps = (nextProps) => {
-      setTimeout(() => {
-            this.setState({inputNotes: nextProps.inputNotes});
-     },this.props.delay);
- }
+        setTimeout(() => {
+                this.setState({inputNotes: nextProps.inputNotes});
+        },this.props.delay);
+    } 
 
     render(){
         const list = this.state.inputNotes.map((n,i)=>{
-            return (
+            return(
                 <li key = {n+i}>
                     {n}
                 </li>
             );
         })
     
-        return (
+        return(
             <div className={classes.ItemList}>
                 <h1>Notes:</h1>
                 <ul>
